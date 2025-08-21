@@ -1,3 +1,4 @@
+import { BrowserWindow } from "electron";
 import { getCpuUsage } from "./utils/get-cpu.js";
 import { getRamUsage } from "./utils/get-ram.js";
 import { getStaticData } from "./utils/get-static-data.js";
@@ -5,14 +6,14 @@ import { getStorageData } from "./utils/get-storage-data.js";
 
 const POLLING_INTERVAL = 500; // in milliseconds
 
-export function pollResources() {
+export function pollResources(mainWindow: BrowserWindow) {
   setInterval(async (): Promise<void> => {
     const cpuUsage: number = await getCpuUsage();
     const ramUsage: number = getRamUsage();
     const storageData = getStorageData();
     const staticData = getStaticData();
 
-    console.log({
+    mainWindow.webContents.send("statistics", {
       cpuUsage,
       ramUsage,
       storageUsage: storageData.usage,
