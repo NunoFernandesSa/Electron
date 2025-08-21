@@ -1,6 +1,7 @@
 {
   "appId": "com.nunofernandes-dev.pcrm",
   "files": ["dist-electron", "dist-react"],
+  "extraResources": ["dist-electron/preload/preload.cjs"],
   "icon": "./desktopIcon.png",
   "mac": {
     "target": "dmg"
